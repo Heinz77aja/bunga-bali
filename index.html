@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Bunga Bali - Toko bunga online premium di Bali. Rangkaian buket segar untuk pernikahan, upacara adat, dan momen spesial Anda. Pengiriman se-Bali.">
+    <meta name="keywords"
+        content="toko bunga bali, florist bali, buket bunga, rangkaian bunga, bunga pernikahan bali, bunga upacara">
+
+    <!--==================== UNICONS ====================-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!--==================== CSS ====================-->
+    <link rel="stylesheet" href="style.css">
+
+    <title>Bunga Bali | Toko Bunga Premium #1 di Bali</title>
+</head>
+
+<body>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">
+                <i class="uil uil-flower"></i> Bunga Bali
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li><a href="#hero" class="nav__link active">Beranda</a></li>
+                    <li><a href="#products" class="nav__link">Buket</a></li>
+                    <li><a href="#flowers" class="nav__link">Bunga Satuan</a></li>
+                    <li><a href="#about" class="nav__link">Tentang Kami</a></li>
+                    <li><a href="#testimonials" class="nav__link">Testimoni</a></li>
+                </ul>
+                <i class="uil uil-times nav__close" id="nav-close"></i>
+            </div>
+
+            <div class="nav__actions">
+                <button class="nav__action-btn" id="search-btn">
+                    <i class="uil uil-search"></i>
+                </button>
+                <button class="nav__action-btn" id="cart-btn">
+                    <i class="uil uil-shopping-bag"></i>
+                    <span class="nav__cart-count">0</span>
+                </button>
+
+                <!-- Auth Navigation -->
+                <div class="nav__auth" id="auth-nav-item">
+                    <a href="/login" class="btn btn--small btn--primary">
+                        Login
+                    </a>
+                </div>
+
+                <div class="nav__user" id="user-nav-item" style="display: none;">
+                    <div class="user__dropdown">
+                        <button class="nav__action-btn user__toggle" id="user-menu-btn">
+                            <i class="uil uil-user-circle"></i>
+                            <span id="user-name">User</span>
+                            <i class="uil uil-angle-down"></i>
+                        </button>
+                        <ul class="user__menu" id="user-menu">
+                            <li><a href="#" onclick="openProfile()"><i class="uil uil-user"></i> Profil Saya</a></li>
+                            <li><a href="#" onclick="openOrderHistory()"><i class="uil uil-history"></i> Riwayat Pesanan</a></li>
+                            <li><a href="#" onclick="openWishlist()"><i class="uil uil-heart"></i> Wishlist</a></li>
+                            <li class="user__menu-divider"></li>
+                            <li><a href="#" onclick="logout()"><i class="uil uil-sign-out-alt"></i> Keluar</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button class="nav__toggle" id="nav-toggle">
+                    <i class="uil uil-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!--==================== ORDER HISTORY MODAL ====================-->
+    <div class="modal" id="history-modal">
+        <div class="modal__content history-modal-content">
+            <span class="modal__close" onclick="closeHistoryModal()">&times;</span>
+            <h2 class="section__title section__title-center">Riwayat Pesanan</h2>
+            <div id="order-history-list" class="history__list">
+                <!-- Order items will be loaded here -->
+                <p style="text-align: center;">Memuat riwayat...</p>
+            </div>
+        </div>
+    </div>
+
+    <!--==================== MAIN ====================-->
+    <main>
+        <!--==================== HERO ====================-->
+        <section class="hero" id="hero">
+            <div class="hero__container container">
+                <div class="hero__content">
+                    <span class="hero__subtitle">🌺 Selamat Datang di Bunga Bali</span>
+                    <h1 class="hero__title">
+                        Keindahan Alam <br>untuk <span>Momen Istimewa</span>
+                    </h1>
+                    <p class="hero__description">
+                        Rangkaian bunga segar pilihan untuk pernikahan, upacara adat Bali, ulang tahun, dan momen
+                        berharga Anda. Dibuat dengan cinta, diantarkan dengan senyum.
+                    </p>
+                    <div class="hero__buttons">
+                        <a href="#products" class="btn btn--primary">
+                            Lihat Koleksi <i class="uil uil-arrow-right btn__icon"></i>
+                        </a>
+                        <a href="https://wa.me/6287867439014" target="_blank" class="btn btn--outline">
+                            <i class="uil uil-whatsapp"></i> Chat WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero__image">
+                    <img src="assets/img/bouquet_home.png" alt="Buket Bunga Premium Bali" class="hero__img">
+
+                    <div class="hero__floating-card hero__floating-card--1">
+                        <div class="hero__floating-icon">
+                            <i class="uil uil-truck"></i>
+                        </div>
+                        <div class="hero__floating-text">
+                            <h4>Gratis Ongkir</h4>
+                            <span>Area Denpasar & Badung</span>
+                        </div>
+                    </div>
+
+                    <div class="hero__floating-card hero__floating-card--2">
+                        <div class="hero__floating-icon">
+                            <i class="uil uil-clock"></i>
+                        </div>
+                        <div class="hero__floating-text">
+                            <h4>Pengiriman Cepat</h4>
+                            <span>Same Day Delivery</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== FEATURES ====================-->
+        <section class="features section">
+            <div class="container">
+                <div class="features__grid">
+                    <div class="feature__card reveal">
+                        <div class="feature__icon">
+                            <i class="uil uil-flower"></i>
+                        </div>
+                        <h3 class="feature__title">Bunga Segar Setiap Hari</h3>
+                        <p class="feature__description">Dipetik langsung dari petani bunga lokal Bali setiap pagi untuk
+                            kesegaran maksimal.</p>
+                    </div>
+
+                    <div class="feature__card reveal">
+                        <div class="feature__icon">
+                            <i class="uil uil-truck"></i>
+                        </div>
+                        <h3 class="feature__title">Pengiriman Se-Bali</h3>
+                        <p class="feature__description">Melayani pengiriman ke seluruh wilayah Bali. Same Day Delivery
+                            untuk Denpasar & sekitarnya.</p>
+                    </div>
+
+                    <div class="feature__card reveal">
+                        <div class="feature__icon">
+                            <i class="uil uil-heart"></i>
+                        </div>
+                        <h3 class="feature__title">Untuk Upacara Adat</h3>
+                        <p class="feature__description">Rangkaian bunga khusus untuk upacara Ngaben, Odalan, Pernikahan
+                            Adat Bali, dan lainnya.</p>
+                    </div>
+
+                    <div class="feature__card reveal">
+                        <div class="feature__icon">
+                            <i class="uil uil-comment-dots"></i>
+                        </div>
+                        <h3 class="feature__title">Custom Request</h3>
+                        <p class="feature__description">Bisa request rangkaian sesuai keinginan Anda. Konsultasi gratis
+                            via WhatsApp!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== BOUQUETS SECTION ====================-->
+        <section class="products section" id="products">
+            <div class="container">
+                <div class="section__header reveal">
+                    <span class="section__subtitle">Koleksi Buket</span>
+                    <h2 class="section__title">Rangkaian Buket Premium</h2>
+                </div>
+
+                <div class="products__grid">
+                    <!-- Bouquet 1 - Money Bouquet -->
+                    <article class="product__card reveal" data-product-id="1" data-product="Buket Uang Premium" data-price="350000"
+                        onclick="orderProduct(this)">
+                        <div class="product__image">
+                            <span class="product__badge">Best Seller</span>
+                            <img src="assets/img/bouquet_money.jpg" alt="Buket Uang - Money Bouquet"
+                                class="product__img">
+                            <div class="product__overlay">
+                                <button class="product__action" title="Tambah ke Wishlist"
+                                    onclick="event.stopPropagation()">
+                                    <i class="uil uil-heart"></i>
+                                </button>
+                                <button class="product__action" title="Lihat Detail" onclick="event.stopPropagation()">
+                                    <i class="uil uil-eye"></i>
+                                </button>
+                                <button class="product__action" title="Tambah ke Keranjang"
+                                    onclick="event.stopPropagation()">
+                                    <i class="uil uil-shopping-bag"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product__content">
+                            <span class="product__category">Money Bouquet</span>
+                            <h3 class="product__title">Buket Uang Premium</h3>
+                            <p class="product__price">Mulai Rp 350.000</p>
+                        </div>
+                    </article>
+
+                    <!-- Bouquet 2 - Elegant Black -->
+                    <article class="product__card reveal" data-product-id="2" data-product="Elegant Black Series" data-price="450000"
+                        onclick="orderProduct(this)">
+                        <div class="product__image">
+                            <span class="product__badge">Eksklusif</span>
+                            <img src="assets/img/bouquet_elegant.jpg" alt="Buket Elegant Hitam" class="product__img">
+                            <div class="product__overlay">
+                                <button class="product__action" title="Tambah ke Wishlist"
+                                    onclick="event.stopPropagation()">
+                                    <i class="uil uil-heart"></i>
+                                </button>
+                                <button class="product__action" title="Lihat Detail" onclick="event.stopPropagation()">
+                                    <i class="uil uil-eye"></i>
+                                </button>
+                                <button class="product__action" title="Tambah ke Keranjang"
+                                    onclick="event.stopPropagation()">
+                                    <i class="uil uil-shopping-bag"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product__content">
+                            <span class="product__category">Premium Bouquet</span>
+                            <h3 class="product__title">Elegant Black Series</h3>
+                            <p class="product__price">Rp 450.000</p>
+                        </div>
+                    </article>
+
+                    <!-- Bouquet 3 -->
+                    <article class="product__card reveal" data-product-id="3" data-product="Cinta Romantis" data-price="385000"
+                        onclick="orderProduct(this)">
+                        <div class="product__image">
+                            <span class="product__badge">Romantis</span>
+                            <img src="assets/img/product1.png" alt="Buket Mawar Merah" class="product__img">
+                            <div class="product__overlay">
+                                <button class="product__action" title="Tambah ke Wishlist"
+                                    onclick="event.stopPropagation()">
+                                    <i class="uil uil-heart"></i>
+                                </button>
+                                <button class="product__action" title="Lihat Detail" onclick="event.stopPropagation()">
+                                    <i class="uil uil-eye"></i>
+                                </button>
+                                <button class="product__action" title="Tambah ke Keranjang"
+                                    onclick="event.stopPropagation()">
+                                    <i class="uil uil-shopping-bag"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product__content">
+                            <span class="product__category">Mawar</span>
+                            <h3 class="product__title">Cinta Romantis</h3>
+                            <p class="product__price">Rp 385.000 <span>Rp 450.000</span></p>
+                        </div>
+                    </article>
+
+                    <!-- Bouquet 4 -->
+                    <article class="product__card reveal" data-product-id="4" data-product="Buket Pengantin" data-price="550000"
+                        onclick="orderProduct(this)">
+                        <div class="product__image">
+                            <span class="product__badge">Pernikahan</span>
+                            <img src="assets/img/product2.png" alt="Buket Pernikahan" class="product__img">
+                            <div class="product__overlay">
+                                <button class="product__action" title="Tambah ke Wishlist"
+                                    onclick="event.stopPropagation()">
+                                    <i class="uil uil-heart"></i>
+                                </button>
+                                <button class="product__action" title="Lihat Detail" onclick="event.stopPropagation()">
+                                    <i class="uil uil-eye"></i>
+                                </button>
+                                <button class="product__action" title="Tambah ke Keranjang"
+                                    onclick="event.stopPropagation()">
+                                    <i class="uil uil-shopping-bag"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product__content">
+                            <span class="product__category">Hand Bouquet</span>
+                            <h3 class="product__title">Buket Pengantin</h3>
+                            <p class="product__price">Rp 550.000</p>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Bouquet Category Pills -->
+                <div class="products__categories reveal"
+                    style="display: flex; justify-content: center; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;">
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Money%20Bouquet"
+                        target="_blank" class="category-pill">Money Bouquet</a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Buket%20Pernikahan"
+                        target="_blank" class="category-pill">Buket Pernikahan</a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Buket%20Wisuda"
+                        target="_blank" class="category-pill">Buket Wisuda</a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Buket%20Ulang%20Tahun"
+                        target="_blank" class="category-pill">Buket Ulang Tahun</a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Buket%20Anniversary"
+                        target="_blank" class="category-pill">Buket Anniversary</a>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== INDIVIDUAL FLOWERS SECTION ====================-->
+        <section class="products section flowers-section" id="flowers">
+            <div class="container">
+                <div class="section__header reveal">
+                    <span class="section__subtitle">Bunga Satuan</span>
+                    <h2 class="section__title">Pilihan Bunga Segar</h2>
+                    <p
+                        style="text-align: center; color: var(--text-light); margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        Tersedia berbagai jenis bunga segar berkualitas untuk rangkaian custom atau keperluan upacara
+                        Anda.
+                    </p>
+                </div>
+
+                <div class="flowers__grid reveal">
+                    <!-- Mawar -->
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Mawar%20Merah%20Rp%2015.000/tangkai"
+                        class="flower__item" data-flower="Mawar Merah" data-price="15000">
+                        <img src="https://images.unsplash.com/photo-1518882605630-8eb294bf3086?w=200&h=200&fit=crop"
+                            alt="Mawar Merah" class="flower__image">
+                        <h4>Mawar Merah</h4>
+                        <span>Rp 15.000/tangkai</span>
+                    </a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Mawar%20Pink%20Rp%2015.000/tangkai"
+                        class="flower__item" data-flower="Mawar Pink" data-price="15000">
+                        <img src="https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=200&h=200&fit=crop"
+                            alt="Mawar Pink" class="flower__image">
+                        <h4>Mawar Pink</h4>
+                        <span>Rp 15.000/tangkai</span>
+                    </a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Mawar%20Putih%20Rp%2015.000/tangkai"
+                        class="flower__item" data-flower="Mawar Putih" data-price="15000">
+                        <img src="https://images.unsplash.com/photo-1559563362-c667ba5f5480?w=200&h=200&fit=crop"
+                            alt="Mawar Putih" class="flower__image">
+                        <h4>Mawar Putih</h4>
+                        <span>Rp 15.000/tangkai</span>
+                    </a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Mawar%20Kuning%20Rp%2018.000/tangkai"
+                        class="flower__item" data-flower="Mawar Kuning" data-price="18000">
+                        <img src="https://images.unsplash.com/photo-1548586196-aa5803b77379?w=200&h=200&fit=crop"
+                            alt="Mawar Kuning" class="flower__image">
+                        <h4>Mawar Kuning</h4>
+                        <span>Rp 18.000/tangkai</span>
+                    </a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Mawar%20Biru%20Rp%2035.000/tangkai"
+                        class="flower__item" data-flower="Mawar Biru" data-price="35000">
+                        <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=200&h=200&fit=crop"
+                            alt="Mawar Biru" class="flower__image">
+                        <h4>Mawar Biru</h4>
+                        <span>Rp 35.000/tangkai</span>
+                    </a>
+
+                    <!-- Aster -->
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Aster%20Ungu%20Rp%208.000/tangkai"
+                        class="flower__item" data-flower="Aster Ungu" data-price="8000">
+                        <img src="https://images.unsplash.com/photo-1599789197514-47270cd526b4?w=200&h=200&fit=crop"
+                            alt="Aster Ungu" class="flower__image">
+                        <h4>Aster Ungu</h4>
+                        <span>Rp 8.000/tangkai</span>
+                    </a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Aster%20Pink%20Rp%208.000/tangkai"
+                        class="flower__item" data-flower="Aster Pink" data-price="8000">
+                        <img src="https://images.unsplash.com/photo-1606041011872-596597976b25?w=200&h=200&fit=crop"
+                            alt="Aster Pink" class="flower__image">
+                        <h4>Aster Pink</h4>
+                        <span>Rp 8.000/tangkai</span>
+                    </a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Aster%20Putih%20Rp%208.000/tangkai"
+                        class="flower__item" data-flower="Aster Putih" data-price="8000">
+                        <img src="https://images.unsplash.com/photo-1594663653925-365bcbf7ef86?w=200&h=200&fit=crop"
+                            alt="Aster Putih" class="flower__image">
+                        <h4>Aster Putih</h4>
+                        <span>Rp 8.000/tangkai</span>
+                    </a>
+
+                    <!-- Gerbera -->
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Gerbera%20Merah%20Rp%2012.000/tangkai"
+                        class="flower__item" data-flower="Gerbera Merah" data-price="12000">
+                        <img src="https://images.unsplash.com/photo-1535586797186-ee88e13376e5?w=200&h=200&fit=crop"
+                            alt="Gerbera Merah" class="flower__image">
+                        <h4>Gerbera Merah</h4>
+                        <span>Rp 12.000/tangkai</span>
+                    </a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Gerbera%20Kuning%20Rp%2012.000/tangkai"
+                        class="flower__item" data-flower="Gerbera Kuning" data-price="12000">
+                        <img src="https://images.unsplash.com/photo-1598224421498-d30da04b43c5?w=200&h=200&fit=crop"
+                            alt="Gerbera Kuning" class="flower__image">
+                        <h4>Gerbera Kuning</h4>
+                        <span>Rp 12.000/tangkai</span>
+                    </a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Gerbera%20Pink%20Rp%2012.000/tangkai"
+                        class="flower__item" data-flower="Gerbera Pink" data-price="12000">
+                        <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=200&h=200&fit=crop"
+                            alt="Gerbera Pink" class="flower__image">
+                        <h4>Gerbera Pink</h4>
+                        <span>Rp 12.000/tangkai</span>
+                    </a>
+
+                    <!-- Krisan -->
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Krisan%20Putih%20Rp%2010.000/tangkai"
+                        class="flower__item" data-flower="Krisan Putih" data-price="10000">
+                        <img src="https://images.unsplash.com/photo-1599789197514-47270cd526b4?w=200&h=200&fit=crop"
+                            alt="Krisan Putih" class="flower__image">
+                        <h4>Krisan Putih</h4>
+                        <span>Rp 10.000/tangkai</span>
+                    </a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Krisan%20Kuning%20Rp%2010.000/tangkai"
+                        class="flower__item" data-flower="Krisan Kuning" data-price="10000">
+                        <img src="https://images.unsplash.com/photo-1550274356-a8a1e8b38e75?w=200&h=200&fit=crop"
+                            alt="Krisan Kuning" class="flower__image">
+                        <h4>Krisan Kuning</h4>
+                        <span>Rp 10.000/tangkai</span>
+                    </a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Krisan%20Ungu%20Rp%2010.000/tangkai"
+                        class="flower__item" data-flower="Krisan Ungu" data-price="10000">
+                        <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=200&h=200&fit=crop"
+                            alt="Krisan Ungu" class="flower__image">
+                        <h4>Krisan Ungu</h4>
+                        <span>Rp 10.000/tangkai</span>
+                    </a>
+
+                    <!-- Lily/Casablanca -->
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Casablanca%20Putih%20Rp%2025.000/tangkai"
+                        class="flower__item" data-flower="Casablanca Putih" data-price="25000">
+                        <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=200&h=200&fit=crop"
+                            alt="Casablanca Putih" class="flower__image">
+                        <h4>Casablanca Putih</h4>
+                        <span>Rp 25.000/tangkai</span>
+                    </a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Casablanca%20Pink%20Rp%2025.000/tangkai"
+                        class="flower__item" data-flower="Casablanca Pink" data-price="25000">
+                        <img src="https://images.unsplash.com/photo-1595353676162-fb8067ef63bb?w=200&h=200&fit=crop"
+                            alt="Casablanca Pink" class="flower__image">
+                        <h4>Casablanca Pink</h4>
+                        <span>Rp 25.000/tangkai</span>
+                    </a>
+
+                    <!-- Hydrangea -->
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Hydrangea%20Biru%20Rp%2045.000/tangkai"
+                        class="flower__item" data-flower="Hydrangea Biru" data-price="45000">
+                        <img src="https://images.unsplash.com/photo-1527061011665-3652c757a4d4?w=200&h=200&fit=crop"
+                            alt="Hydrangea Biru" class="flower__image">
+                        <h4>Hydrangea Biru</h4>
+                        <span>Rp 45.000/tangkai</span>
+                    </a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Hydrangea%20Pink%20Rp%2045.000/tangkai"
+                        class="flower__item" data-flower="Hydrangea Pink" data-price="45000">
+                        <img src="https://images.unsplash.com/photo-1457089328109-e5d9bd499191?w=200&h=200&fit=crop"
+                            alt="Hydrangea Pink" class="flower__image">
+                        <h4>Hydrangea Pink</h4>
+                        <span>Rp 45.000/tangkai</span>
+                    </a>
+
+                    <!-- Bunga Matahari -->
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Bunga%20Matahari%20Rp%2020.000/tangkai"
+                        class="flower__item" data-flower="Bunga Matahari" data-price="20000">
+                        <img src="https://images.unsplash.com/photo-1597848212624-a19eb35e2651?w=200&h=200&fit=crop"
+                            alt="Bunga Matahari" class="flower__image">
+                        <h4>Bunga Matahari</h4>
+                        <span>Rp 20.000/tangkai</span>
+                    </a>
+
+                    <!-- Baby Breath -->
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Baby%20Breath%20Rp%2035.000/ikat"
+                        class="flower__item" data-flower="Baby Breath" data-price="35000">
+                        <img src="https://images.unsplash.com/photo-1558704164-ab7a0016c1f3?w=200&h=200&fit=crop"
+                            alt="Baby Breath" class="flower__image">
+                        <h4>Baby Breath</h4>
+                        <span>Rp 35.000/ikat</span>
+                    </a>
+
+                    <!-- Carnation -->
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Carnation%20Merah%20Rp%208.000/tangkai"
+                        class="flower__item" data-flower="Carnation Merah" data-price="8000">
+                        <img src="https://images.unsplash.com/photo-1592767023853-51b6d4e32cd7?w=200&h=200&fit=crop"
+                            alt="Carnation Merah" class="flower__image">
+                        <h4>Carnation Merah</h4>
+                        <span>Rp 8.000/tangkai</span>
+                    </a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Carnation%20Pink%20Rp%208.000/tangkai"
+                        class="flower__item" data-flower="Carnation Pink" data-price="8000">
+                        <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=200&h=200&fit=crop"
+                            alt="Carnation Pink" class="flower__image">
+                        <h4>Carnation Pink</h4>
+                        <span>Rp 8.000/tangkai</span>
+                    </a>
+
+                    <!-- Anthurium -->
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Anthurium%20Merah%20Rp%2030.000/tangkai"
+                        class="flower__item" data-flower="Anthurium Merah" data-price="30000">
+                        <img src="https://images.unsplash.com/photo-1598880940942-9e0d0d3c7104?w=200&h=200&fit=crop"
+                            alt="Anthurium Merah" class="flower__image">
+                        <h4>Anthurium Merah</h4>
+                        <span>Rp 30.000/tangkai</span>
+                    </a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Anthurium%20Hijau%20Rp%2030.000/tangkai"
+                        class="flower__item" data-flower="Anthurium Hijau" data-price="30000">
+                        <img src="https://images.unsplash.com/photo-1598880940080-ff9a29891b77?w=200&h=200&fit=crop"
+                            alt="Anthurium Hijau" class="flower__image">
+                        <h4>Anthurium Hijau</h4>
+                        <span>Rp 30.000/tangkai</span>
+                    </a>
+
+                    <!-- Tulip -->
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Tulip%20Merah%20Rp%2022.000/tangkai"
+                        class="flower__item" data-flower="Tulip Merah" data-price="22000">
+                        <img src="https://images.unsplash.com/photo-1520763185298-1b434c919102?w=200&h=200&fit=crop"
+                            alt="Tulip Merah" class="flower__image">
+                        <h4>Tulip Merah</h4>
+                        <span>Rp 22.000/tangkai</span>
+                    </a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Tulip%20Kuning%20Rp%2022.000/tangkai"
+                        class="flower__item" data-flower="Tulip Kuning" data-price="22000">
+                        <img src="https://images.unsplash.com/photo-1585310099550-59b8df3c8ed7?w=200&h=200&fit=crop"
+                            alt="Tulip Kuning" class="flower__image">
+                        <h4>Tulip Kuning</h4>
+                        <span>Rp 22.000/tangkai</span>
+                    </a>
+
+                    <!-- Peony -->
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Peony%20Pink%20Rp%2075.000/tangkai"
+                        class="flower__item" data-flower="Peony Pink" data-price="75000">
+                        <img src="https://images.unsplash.com/photo-1527061011665-3652c757a4d4?w=200&h=200&fit=crop"
+                            alt="Peony Pink" class="flower__image">
+                        <h4>Peony Pink</h4>
+                        <span>Rp 75.000/tangkai</span>
+                    </a>
+                </div>
+
+                <!-- Flower Category Pills -->
+                <div class="products__categories reveal"
+                    style="display: flex; justify-content: center; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;">
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20bunga%20Mawar"
+                        target="_blank" class="category-pill">Mawar</a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20bunga%20Aster"
+                        target="_blank" class="category-pill">Aster</a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20bunga%20Gerbera"
+                        target="_blank" class="category-pill">Gerbera</a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20bunga%20Krisan"
+                        target="_blank" class="category-pill">Krisan</a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20bunga%20Lily%20Casablanca"
+                        target="_blank" class="category-pill">Lily/Casablanca</a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20bunga%20Hydrangea"
+                        target="_blank" class="category-pill">Hydrangea</a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20bunga%20Carnation"
+                        target="_blank" class="category-pill">Carnation</a>
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20Daun%20Hijau"
+                        target="_blank" class="category-pill">Daun Hijau</a>
+                </div>
+
+                <div style="text-align: center; margin-top: 2.5rem;" class="reveal">
+                    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20bunga%20satuan."
+                        target="_blank" class="btn btn--primary">
+                        <i class="uil uil-whatsapp"></i> Pesan via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== ABOUT ====================-->
+        <section class="about section" id="about">
+            <div class="about__container container">
+                <div class="about__image reveal-left">
+                    <img src="assets/img/bouquet_home.png" alt="Tentang Bunga Bali" class="about__img">
+                    <div class="about__experience">
+                        <h3>5+</h3>
+                        <p>Tahun Pengalaman</p>
+                    </div>
+                </div>
+
+                <div class="about__content reveal-right">
+                    <span class="section__subtitle">Tentang Kami</span>
+                    <h2 class="section__title" style="text-align: left;">Florist Terpercaya <br>di Pulau Dewata</h2>
+                    <p class="about__description">
+                        <strong>Bunga Bali</strong> hadir sejak 2020 untuk memenuhi kebutuhan rangkaian bunga
+                        berkualitas tinggi untuk masyarakat Bali. Kami memahami pentingnya bunga dalam setiap momen
+                        kehidupan orang Bali — dari upacara adat, pernikahan tradisional, hingga perayaan modern.
+                    </p>
+                    <p class="about__description">
+                        Kami bekerja sama langsung dengan petani bunga lokal di Bedugul, Kintamani, dan sekitarnya untuk
+                        memastikan setiap tangkai bunga yang sampai ke tangan Anda adalah yang terbaik. Tim florist kami
+                        yang berpengalaman siap merangkai kebahagiaan untuk Anda.
+                    </p>
+
+                    <ul class="about__list">
+                        <li class="about__list-item">
+                            <i class="uil uil-check"></i>
+                            Bunga segar langsung dari petani lokal Bali
+                        </li>
+                        <li class="about__list-item">
+                            <i class="uil uil-check"></i>
+                            Pengiriman same day ke Denpasar, Badung, Gianyar, Tabanan
+                        </li>
+                        <li class="about__list-item">
+                            <i class="uil uil-check"></i>
+                            Bisa bayar via Transfer, QRIS, atau COD
+                        </li>
+                        <li class="about__list-item">
+                            <i class="uil uil-check"></i>
+                            Konsultasi & custom request gratis via WhatsApp
+                        </li>
+                    </ul>
+
+                    <a href="https://wa.me/6287867439014" target="_blank" class="btn btn--primary">
+                        <i class="uil uil-whatsapp"></i> Hubungi Kami
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== DELIVERY AREAS ====================-->
+        <section class="section" style="background: var(--cream);">
+            <div class="container">
+                <div class="section__header reveal">
+                    <span class="section__subtitle">Jangkauan Pengiriman</span>
+                    <h2 class="section__title">Melayani Seluruh Bali</h2>
+                </div>
+
+                <div class="delivery__grid reveal"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: center;">
+                    <div class="delivery__item"
+                        style="background: var(--white); padding: 1.5rem; border-radius: var(--radius); box-shadow: 0 5px 20px var(--shadow);">
+                        <i class="uil uil-map-marker" style="font-size: 2rem; color: var(--primary);"></i>
+                        <h4 style="margin: 0.5rem 0;">Denpasar</h4>
+                        <span style="font-size: 0.875rem; color: var(--text-light);">Gratis Ongkir</span>
+                    </div>
+                    <div class="delivery__item"
+                        style="background: var(--white); padding: 1.5rem; border-radius: var(--radius); box-shadow: 0 5px 20px var(--shadow);">
+                        <i class="uil uil-map-marker" style="font-size: 2rem; color: var(--primary);"></i>
+                        <h4 style="margin: 0.5rem 0;">Badung</h4>
+                        <span style="font-size: 0.875rem; color: var(--text-light);">Gratis Ongkir</span>
+                    </div>
+                    <div class="delivery__item"
+                        style="background: var(--white); padding: 1.5rem; border-radius: var(--radius); box-shadow: 0 5px 20px var(--shadow);">
+                        <i class="uil uil-map-marker" style="font-size: 2rem; color: var(--primary);"></i>
+                        <h4 style="margin: 0.5rem 0;">Gianyar</h4>
+                        <span style="font-size: 0.875rem; color: var(--text-light);">Ongkir Rp 20.000</span>
+                    </div>
+                    <div class="delivery__item"
+                        style="background: var(--white); padding: 1.5rem; border-radius: var(--radius); box-shadow: 0 5px 20px var(--shadow);">
+                        <i class="uil uil-map-marker" style="font-size: 2rem; color: var(--primary);"></i>
+                        <h4 style="margin: 0.5rem 0;">Tabanan</h4>
+                        <span style="font-size: 0.875rem; color: var(--text-light);">Ongkir Rp 25.000</span>
+                    </div>
+                    <div class="delivery__item"
+                        style="background: var(--white); padding: 1.5rem; border-radius: var(--radius); box-shadow: 0 5px 20px var(--shadow);">
+                        <i class="uil uil-map-marker" style="font-size: 2rem; color: var(--primary);"></i>
+                        <h4 style="margin: 0.5rem 0;">Klungkung</h4>
+                        <span style="font-size: 0.875rem; color: var(--text-light);">Ongkir Rp 30.000</span>
+                    </div>
+                    <div class="delivery__item"
+                        style="background: var(--white); padding: 1.5rem; border-radius: var(--radius); box-shadow: 0 5px 20px var(--shadow);">
+                        <i class="uil uil-map-marker" style="font-size: 2rem; color: var(--primary);"></i>
+                        <h4 style="margin: 0.5rem 0;">Area Lainnya</h4>
+                        <span style="font-size: 0.875rem; color: var(--text-light);">Hubungi Kami</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== TESTIMONIALS ====================-->
+        <section class="testimonials section" id="testimonials">
+            <div class="container">
+                <div class="section__header reveal">
+                    <span class="section__subtitle">Testimoni</span>
+                    <h2 class="section__title">Apa Kata Pelanggan Kami</h2>
+                </div>
+
+                <div class="testimonial__container reveal">
+                    <div class="testimonial__content" id="testimonial-content">
+                        <p class="testimonial__text">
+                            "Bunga Bali sangat membantu untuk persiapan pernikahan adat saya! Rangkaiannya cantik sekali
+                            dan sesuai dengan tema upacara. Pengiriman tepat waktu dan tim-nya sangat ramah. Terima
+                            kasih Bunga Bali! 🙏"
+                        </p>
+                        <div class="testimonial__author">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Pelanggan"
+                                class="testimonial__avatar">
+                            <div class="testimonial__info">
+                                <h4>Ni Kadek Ayu</h4>
+                                <span>Denpasar</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial__nav">
+                        <button class="testimonial__nav-btn" id="prev-btn">
+                            <i class="uil uil-angle-left"></i>
+                        </button>
+                        <button class="testimonial__nav-btn" id="next-btn">
+                            <i class="uil uil-angle-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== NEWSLETTER ====================-->
+        <section class="newsletter section" id="newsletter">
+            <div class="newsletter__container container">
+                <div class="newsletter__content reveal-left">
+                    <h2 class="newsletter__title">Dapatkan Promo Spesial!</h2>
+                    <p class="newsletter__description">
+                        Daftar newsletter kami untuk mendapatkan info promo, diskon hari raya, dan penawaran eksklusif
+                        lainnya. Langsung ke inbox Anda!
+                    </p>
+                </div>
+
+                <form class="newsletter__form reveal-right" id="newsletter-form">
+                    <input type="email" placeholder="Masukkan email Anda" class="newsletter__input" required>
+                    <button type="submit" class="btn btn--primary">Daftar</button>
+                </form>
+            </div>
+        </section>
+
+        <!--==================== CTA WHATSAPP ====================-->
+        <section class="section" style="background: var(--dark); text-align: center; padding: 4rem 0;">
+            <div class="container reveal">
+                <h2 style="color: var(--white); font-size: var(--h2); margin-bottom: 1rem;">Butuh Rangkaian Khusus?</h2>
+                <p
+                    style="color: rgba(255,255,255,0.8); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Konsultasikan kebutuhan bunga Anda langsung dengan tim kami. Gratis konsultasi untuk upacara adat,
+                    pernikahan, dan event besar!
+                </p>
+                <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20pesan%20bunga."
+                    target="_blank" class="btn btn--primary" style="background: #25D366;">
+                    <i class="uil uil-whatsapp"></i> Chat via WhatsApp
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!--==================== FOOTER ====================-->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="#" class="nav__logo" style="color: #fff;">
+                        <i class="uil uil-flower"></i> Bunga Bali
+                    </a>
+                    <p>Toko bunga online terpercaya di Bali sejak 2020. Melayani rangkaian bunga untuk pernikahan,
+                        upacara adat, dan berbagai momen spesial.</p>
+                    <div class="footer__socials">
+                        <a href="#" class="footer__social"><i class="uil uil-facebook-f"></i></a>
+                        <a href="#" class="footer__social"><i class="uil uil-instagram"></i></a>
+                        <a href="https://wa.me/6287867439014" class="footer__social"><i
+                                class="uil uil-whatsapp"></i></a>
+                        <a href="#" class="footer__social"><i class="uil uil-envelope"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer__links-section">
+                    <h3 class="footer__title">Kategori</h3>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Buket Mawar</a></li>
+                        <li><a href="#" class="footer__link">Bunga Pernikahan</a></li>
+                        <li><a href="#" class="footer__link">Upacara Adat</a></li>
+                        <li><a href="#" class="footer__link">Duka Cita</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__links-section">
+                    <h3 class="footer__title">Informasi</h3>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Tentang Kami</a></li>
+                        <li><a href="#" class="footer__link">Cara Pemesanan</a></li>
+                        <li><a href="#" class="footer__link">Area Pengiriman</a></li>
+                        <li><a href="#" class="footer__link">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__links-section">
+                    <h3 class="footer__title">Hubungi Kami</h3>
+                    <ul class="footer__links">
+                        <li><i class="uil uil-map-marker"></i> Jl. Raya Kuta No. 123, Bali</li>
+                        <li><i class="uil uil-phone"></i> +62 812 3456 7890</li>
+                        <li><i class="uil uil-envelope"></i> halo@bungabali.com</li>
+                        <li><i class="uil uil-clock"></i> Buka 08.00 - 20.00 WITA</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer__payment"
+                style="text-align: center; padding: 2rem 0; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem;">
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.875rem; margin-bottom: 1rem;">Metode Pembayaran:
+                </p>
+                <div
+                    style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; color: rgba(255,255,255,0.8);">
+                    <span>💳 Transfer Bank</span>
+                    <span>📱 QRIS</span>
+                    <span>💵 COD (Cash on Delivery)</span>
+                    <span>🏧 Virtual Account</span>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p>&copy; 2026 Bunga Bali. Hak Cipta Dilindungi. Dibuat dengan <i class="uil uil-heart"
+                        style="color: #c9a87c;"></i> di Bali.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!--==================== FLOATING WHATSAPP ====================-->
+    <a href="https://wa.me/6287867439014?text=Halo%20Bunga%20Bali!%20Saya%20ingin%20bertanya%20tentang%20produk."
+        target="_blank" class="whatsapp-float" id="whatsapp-float">
+        <i class="uil uil-whatsapp"></i>
+    </a>
+
+    <!--==================== SCROLL TO TOP ====================-->
+    <a href="#" class="scroll-top" id="scroll-top">
+        <i class="uil uil-arrow-up"></i>
+    </a>
+
+    <!--==================== MAIN JS ====================-->
+    <script src="main.js"></script>
+</body>
+
+</html>

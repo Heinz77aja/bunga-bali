@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Saya | Bunga Bali</title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .profile {
+            padding-top: 8rem;
+            min-height: 80vh;
+        }
+        .profile__container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+        .profile__sidebar {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px var(--shadow);
+            height: fit-content;
+        }
+        .profile__user {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .profile__img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: var(--grad-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+        }
+        .profile__nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .profile__nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius);
+            font-weight: 500;
+            color: var(--text);
+            transition: var(--transition-fast);
+        }
+        .profile__nav-btn:hover, .profile__nav-btn.active {
+            background: var(--cream);
+            color: var(--primary-dark);
+        }
+        .profile__content {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+        .profile__tab {
+            display: none;
+        }
+        .profile__tab.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .form__group {
+            margin-bottom: 1.5rem;
+        }
+        .form__group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: var(--small);
+        }
+        .form__input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: var(--radius);
+            font-family: inherit;
+            transition: var(--transition-fast);
+        }
+        .form__input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        @media (max-width: 768px) {
+            .profile__container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header scrolled" id="header">
+        <nav class="nav container">
+            <a href="/" class="nav__logo">
+                <i class="uil uil-flower"></i> Bunga Bali
+            </a>
+            <div class="nav__actions">
+                <a href="/" class="btn btn--small btn--outline">Kembali ke Beranda</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="profile container">
+        <div class="profile__container">
+            <!-- Sidebar -->
+            <aside class="profile__sidebar">
+                <div class="profile__user">
+                    <div class="profile__img">
+                        <i class="uil uil-user"></i>
+                    </div>
+                    <h3 id="sidebar-name">Memuat...</h3>
+                    <p id="sidebar-email" style="font-size: var(--small); color: var(--text-light);"></p>
+                </div>
+                <nav class="profile__nav">
+                    <a href="#" class="profile__nav-btn active" onclick="switchTab('profile', this)">
+                        <i class="uil uil-user"></i> Profil Saya
+                    </a>
+                    <a href="#" class="profile__nav-btn" onclick="switchTab('orders', this)">
+                        <i class="uil uil-history"></i> Riwayat Pesanan
+                    </a>
+                    <a href="#" class="profile__nav-btn" onclick="switchTab('password', this)">
+                        <i class="uil uil-key-skeleton"></i> Ubah Password
+                    </a>
+                    <a href="#" class="profile__nav-btn" onclick="logout()" style="color: #ff4757;">
+                        <i class="uil uil-sign-out-alt"></i> Keluar
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Content -->
+            <section class="profile__content">
+                <!-- Profile Tab -->
+                <div id="profile-tab" class="profile__tab active">
+                    <h2 class="section__title" style="text-align: left; margin-bottom: 2rem;">Detail Profil</h2>
+                    <form id="profile-form" onsubmit="handleUpdateProfile(event)">
+                        <div class="form__group">
+                            <label>Nama Lengkap</label>
+                            <input type="text" id="prof-name" class="form__input" required>
+                        </div>
+                        <div class="form__group">
+                            <label>Email (Tidak dapat diubah)</label>
+                            <input type="email" id="prof-email" class="form__input" disabled>
+                        </div>
+                        <div class="form__group">
+                            <label>Nomor Telepon (WhatsApp)</label>
+                            <input type="tel" id="prof-phone" class="form__input">
+                        </div>
+                        <div class="form__group">
+                            <label>Alamat Pengiriman</label>
+                            <textarea id="prof-address" class="form__input" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary">Simpan Perubahan</button>
+                    </form>
+                </div>
+
+                <!-- Orders Tab -->
+                <div id="orders-tab" class="profile__tab">
+                    <h2 class="section__title" style="text-align: left; margin-bottom: 2rem;">Riwayat Pesanan</h2>
+                    <div id="order-list">
+                        <!-- Orders will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Password Tab -->
+                <div id="password-tab" class="profile__tab">
+                    <h2 class="section__title" style="text-align: left; margin-bottom: 2rem;">Ubah Password</h2>
+                    <form id="password-form" onsubmit="handleChangePassword(event)">
+                        <div class="form__group">
+                            <label>Password Sekarang</label>
+                            <input type="password" id="pass-current" class="form__input" required>
+                        </div>
+                        <div class="form__group">
+                            <label>Password Baru</label>
+                            <input type="password" id="pass-new" class="form__input" required minlength="6">
+                        </div>
+                        <div class="form__group">
+                            <label>Konfirmasi Password Baru</label>
+                            <input type="password" id="pass-confirm" class="form__input" required minlength="6">
+                        </div>
+                        <button type="submit" class="btn btn--primary">Ubah Password</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="/main.js"></script>
+    <script>
+        // Tab switching logic
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.profile__tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.profile__nav-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(tabId + '-tab').classList.add('active');
+            btn.classList.add('active');
+
+            if (tabId === 'orders') fetchOrders();
+        }
+
+        // Fetch profile data on load
+        async function loadProfileData() {
+            try {
+                const response = await fetch('/customer/api/profile');
+                const result = await response.json();
+
+                if (result.success) {
+                    const user = result.data;
+                    document.getElementById('sidebar-name').textContent = user.name;
+                    document.getElementById('sidebar-email').textContent = user.email;
+                    document.getElementById('prof-name').value = user.name;
+                    document.getElementById('prof-email').value = user.email;
+                    document.getElementById('prof-phone').value = user.phone || '';
+                    document.getElementById('prof-address').value = user.address || '';
+                } else {
+                    window.location.href = '/#login';
+                }
+            } catch (error) {
+                console.error('Error loading profile:', error);
+            }
+        }
+
+        async function handleUpdateProfile(e) {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('prof-name').value,
+                phone: document.getElementById('prof-phone').value,
+                address: document.getElementById('prof-address').value
+            };
+
+            try {
+                const response = await fetch('/customer/api/profile', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Profil berhasil diperbarui! ✨');
+                    loadProfileData();
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                alert('Terjadi kesalahan saat menyimpan profil');
+            }
+        }
+
+        async function handleChangePassword(e) {
+            e.preventDefault();
+            const currentPassword = document.getElementById('pass-current').value;
+            const newPassword = document.getElementById('pass-new').value;
+            const confirmPassword = document.getElementById('pass-confirm').value;
+
+            if (newPassword !== confirmPassword) {
+                return alert('Password baru dan konfirmasi tidak cocok!');
+            }
+
+            try {
+                const response = await fetch('/customer/api/password', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ currentPassword, newPassword })
+                });
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Password berhasil diubah! 🔐');
+                    e.target.reset();
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                alert('Terjadi kesalahan saat mengubah password');
+            }
+        }
+
+        async function fetchOrders() {
+            const list = document.getElementById('order-list');
+            list.innerHTML = '<p>Memuat pesanan...</p>';
+
+            try {
+                const response = await fetch('/api/orders/my-orders');
+                const result = await response.json();
+
+                if (result.success) {
+                    if (result.data.length === 0) {
+                        list.innerHTML = '<p>Belum ada pesanan.</p>';
+                        return;
+                    }
+
+                    list.innerHTML = result.data.map(order => `
+                        <div style="border: 1px solid rgba(0,0,0,0.05); padding: 1.5rem; border-radius: var(--radius); margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                                <strong>#${order.order_number}</strong>
+                                <span class="status-badge status-${order.status}">${order.status.toUpperCase()}</span>
+                            </div>
+                            <div style="font-size: var(--small); color: var(--text-light);">
+                                <p>${new Date(order.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                                <ul style="margin-top: 0.5rem;">
+                                    ${order.items.map(item => `<li>${item.quantity}x ${item.product_name}</li>`).join('')}
+                                </ul>
+                                <p style="margin-top: 1rem; color: var(--dark); font-weight: 600;">Total: Rp ${order.total_amount.toLocaleString('id-ID')}</p>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                list.innerHTML = '<p>Gagal memuat pesanan.</p>';
+            }
+        }
+
+        loadProfileData();
+    </script>
+</body>
+</html>

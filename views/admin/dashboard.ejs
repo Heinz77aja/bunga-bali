@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #c9a87c;
+            --primary-dark: #8b6b4a;
+            --bg: #f5f0e8;
+            --white: #fff;
+            --dark: #1a1a1a;
+            --gray: #666;
+            --light-gray: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            z-index: 100;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            color: var(--gray);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: var(--bg);
+            color: var(--primary-dark);
+        }
+
+        .sidebar-menu a.active {
+            font-weight: 600;
+        }
+
+        .sidebar-menu i {
+            font-size: 1.25rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 260px;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 1.75rem;
+            color: var(--dark);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 5px 20px rgba(201, 168, 124, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--light-gray);
+            color: var(--dark);
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-card h3 {
+            color: var(--gray);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-top: 0.5rem;
+        }
+
+        .stat-card .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card .icon.green {
+            background: #e8f5e9;
+            color: #4CAF50;
+        }
+
+        .stat-card .icon.blue {
+            background: #e3f2fd;
+            color: #2196F3;
+        }
+
+        .stat-card .icon.orange {
+            background: #fff3e0;
+            color: #FF9800;
+        }
+
+        .stat-card .icon.gold {
+            background: #fef9e7;
+            color: var(--primary);
+        }
+
+        /* Table */
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h2 {
+            font-size: 1.25rem;
+            color: var(--dark);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+        }
+
+        th {
+            background: var(--bg);
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.875rem;
+        }
+
+        td {
+            border-bottom: 1px solid var(--light-gray);
+            color: var(--gray);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #fafafa;
+        }
+
+        /* Badge */
+        .badge {
+            padding: 0.375rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-pending {
+            background: #fff3e0;
+            color: #FF9800;
+        }
+
+        .badge-confirmed {
+            background: #e3f2fd;
+            color: #2196F3;
+        }
+
+        .badge-processing {
+            background: #f3e5f5;
+            color: #9C27B0;
+        }
+
+        .badge-shipped {
+            background: #e0f2f1;
+            color: #009688;
+        }
+
+        .badge-delivered {
+            background: #e8f5e9;
+            color: #4CAF50;
+        }
+
+        .badge-cancelled {
+            background: #ffebee;
+            color: #f44336;
+        }
+
+        /* Alert */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .alert-success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .alert-error {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <a href="/admin/dashboard" class="sidebar-logo">
+            <i class="uil uil-flower"></i> Bunga Bali
+        </a>
+        <ul class="sidebar-menu">
+            <li><a href="/admin/dashboard" class="active"><i class="uil uil-dashboard"></i> Dashboard</a></li>
+            <li><a href="/admin/products"><i class="uil uil-box"></i> Produk</a></li>
+            <li><a href="/admin/orders"><i class="uil uil-shopping-cart"></i> Pesanan</a></li>
+            <li><a href="/" target="_blank"><i class="uil uil-globe"></i> Lihat Website</a></li>
+            <li><a href="/admin/logout"><i class="uil uil-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="header">
+            <h1>Dashboard</h1>
+            <div class="header-right">
+                <div class="user-info">
+                    <i class="uil uil-user-circle"></i>
+                    <span>Halo, <%= admin.full_name || admin.username %>!</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="icon gold"><i class="uil uil-box"></i></div>
+                <h3>Total Produk</h3>
+                <div class="value">
+                    <%= stats.totalProducts %>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="icon blue"><i class="uil uil-shopping-cart"></i></div>
+                <h3>Total Pesanan</h3>
+                <div class="value">
+                    <%= stats.totalOrders %>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="icon orange"><i class="uil uil-clock"></i></div>
+                <h3>Pesanan Pending</h3>
+                <div class="value">
+                    <%= stats.pendingOrders %>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="icon green"><i class="uil uil-dollar-alt"></i></div>
+                <h3>Total Revenue</h3>
+                <div class="value">Rp <%= stats.totalRevenue.toLocaleString('id-ID') %>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="card">
+            <div class="card-header">
+                <h2>Pesanan Terbaru</h2>
+                <a href="/admin/orders" class="btn btn-secondary btn-sm">Lihat Semua</a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No. Pesanan</th>
+                        <th>Pelanggan</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (recentOrders.length===0) { %>
+                        <tr>
+                            <td colspan="5" style="text-align:center">Belum ada pesanan</td>
+                        </tr>
+                        <% } else { %>
+                            <% recentOrders.forEach(order=> { %>
+                                <tr>
+                                    <td><strong>
+                                            <%= order.order_number %>
+                                        </strong></td>
+                                    <td>
+                                        <%= order.customer_name %>
+                                    </td>
+                                    <td>Rp <%= order.total_amount.toLocaleString('id-ID') %>
+                                    </td>
+                                    <td><span class="badge badge-<%= order.status %>">
+                                            <%= order.status %>
+                                        </span></td>
+                                    <td>
+                                        <%= new Date(order.created_at).toLocaleDateString('id-ID') %>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>

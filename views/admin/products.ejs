@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #c9a87c;
+            --primary-dark: #8b6b4a;
+            --bg: #f5f0e8;
+            --white: #fff;
+            --dark: #1a1a1a;
+            --gray: #666;
+            --light-gray: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            z-index: 100;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            color: var(--gray);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: var(--bg);
+            color: var(--primary-dark);
+        }
+
+        .sidebar-menu a.active {
+            font-weight: 600;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 1.75rem;
+            color: var(--dark);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--light-gray);
+            color: var(--dark);
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h2 {
+            font-size: 1.25rem;
+            color: var(--dark);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+        }
+
+        th {
+            background: var(--bg);
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.875rem;
+        }
+
+        td {
+            border-bottom: 1px solid var(--light-gray);
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        tr:hover td {
+            background: #fafafa;
+        }
+
+        .product-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .badge {
+            padding: 0.375rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-active {
+            background: #e8f5e9;
+            color: #4CAF50;
+        }
+
+        .badge-inactive {
+            background: #ffebee;
+            color: #f44336;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .alert-success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .alert-error {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.25rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <a href="/admin/dashboard" class="sidebar-logo"><i class="uil uil-flower"></i> Bunga Bali</a>
+        <ul class="sidebar-menu">
+            <li><a href="/admin/dashboard"><i class="uil uil-dashboard"></i> Dashboard</a></li>
+            <li><a href="/admin/products" class="active"><i class="uil uil-box"></i> Produk</a></li>
+            <li><a href="/admin/orders"><i class="uil uil-shopping-cart"></i> Pesanan</a></li>
+            <li><a href="/" target="_blank"><i class="uil uil-globe"></i> Lihat Website</a></li>
+            <li><a href="/admin/logout"><i class="uil uil-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="header">
+            <h1>Kelola Produk</h1>
+            <button class="btn btn-primary" onclick="openModal('addModal')">
+                <i class="uil uil-plus"></i> Tambah Produk
+            </button>
+        </div>
+
+        <% if (success) { %>
+            <div class="alert alert-success"><i class="uil uil-check-circle"></i>
+                <%= success %>
+            </div>
+            <% } %>
+                <% if (error) { %>
+                    <div class="alert alert-error"><i class="uil uil-exclamation-circle"></i>
+                        <%= error %>
+                    </div>
+                    <% } %>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Daftar Produk (<%= products.length %>)</h2>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Gambar</th>
+                                        <th>Nama</th>
+                                        <th>Kategori</th>
+                                        <th>Harga</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if (products.length===0) { %>
+                                        <tr>
+                                            <td colspan="6" style="text-align:center">Belum ada produk</td>
+                                        </tr>
+                                        <% } else { %>
+                                            <% products.forEach(product=> { %>
+                                                <tr>
+                                                    <td>
+                                                        <% if (product.image_url) { %>
+                                                            <img src="<%= product.image_url %>"
+                                                                alt="<%= product.name %>" class="product-img">
+                                                            <% } else { %>
+                                                                <div class="product-img"
+                                                                    style="background:#eee;display:flex;align-items:center;justify-content:center">
+                                                                    <i class="uil uil-image"></i>
+                                                                </div>
+                                                                <% } %>
+                                                    </td>
+                                                    <td><strong>
+                                                            <%= product.name %>
+                                                        </strong>
+                                                        <% if (product.badge) { %><br><small class="badge"
+                                                                style="background:#fef9e7;color:#c9a87c">
+                                                                <%= product.badge %>
+                                                            </small>
+                                                            <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <%= product.category %>
+                                                            <% if (product.subcategory) { %> / <%= product.subcategory
+                                                                    %>
+                                                                    <% } %>
+                                                    </td>
+                                                    <td>Rp <%= product.price.toLocaleString('id-ID') %>
+                                                    </td>
+                                                    <td><span
+                                                            class="badge badge-<%= product.is_active ? 'active' : 'inactive' %>">
+                                                            <%= product.is_active ? 'Aktif' : 'Nonaktif' %>
+                                                        </span></td>
+                                                    <td>
+                                                        <div class="actions">
+                                                            <button class="btn btn-secondary btn-sm"
+                                                                data-product="<%= JSON.stringify(product) %>"
+                                                                onclick="editProduct(JSON.parse(this.dataset.product))"><i
+                                                                    class="uil uil-edit"></i></button>
+                                                            <form action="/admin/products/<%= product.id %>/delete"
+                                                                method="POST" style="display:inline"
+                                                                onsubmit="return confirm('Hapus produk ini?')">
+                                                                <button type="submit" class="btn btn-danger btn-sm"><i
+                                                                        class="uil uil-trash"></i></button>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+                                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+    </main>
+
+    <!-- Add Modal -->
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Tambah Produk Baru</h3>
+                <button class="modal-close" onclick="closeModal('addModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/products" method="POST" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Kategori</label>
+                            <select name="category" required>
+                                <option value="bouquet">Buket</option>
+                                <option value="flower">Bunga Satuan</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Sub-kategori</label>
+                            <input type="text" name="subcategory" placeholder="Contoh: mawar, wedding">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Produk</label>
+                        <input type="text" name="name" required placeholder="Nama produk">
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi</label>
+                        <textarea name="description" rows="3" placeholder="Deskripsi produk"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Harga (Rp)</label>
+                            <input type="number" name="price" required placeholder="350000">
+                        </div>
+                        <div class="form-group">
+                            <label>Badge</label>
+                            <input type="text" name="badge" placeholder="Best Seller, Promo">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Gambar</label>
+                        <input type="file" name="image" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label>Atau URL Gambar</label>
+                        <input type="text" name="image_url" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label><input type="checkbox" name="is_active" value="1" checked> Produk Aktif</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%"><i class="uil uil-check"></i>
+                        Simpan Produk</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Produk</h3>
+                <button class="modal-close" onclick="closeModal('editModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm" method="POST" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Kategori</label>
+                            <select name="category" id="edit_category" required>
+                                <option value="bouquet">Buket</option>
+                                <option value="flower">Bunga Satuan</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Sub-kategori</label>
+                            <input type="text" name="subcategory" id="edit_subcategory">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Produk</label>
+                        <input type="text" name="name" id="edit_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi</label>
+                        <textarea name="description" id="edit_description" rows="3"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Harga (Rp)</label>
+                            <input type="number" name="price" id="edit_price" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Badge</label>
+                            <input type="text" name="badge" id="edit_badge">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Gambar Baru</label>
+                        <input type="file" name="image" accept="image/*">
+                        <input type="hidden" name="existing_image" id="edit_existing_image">
+                    </div>
+                    <div class="form-group">
+                        <label><input type="checkbox" name="is_active" id="edit_is_active" value="1"> Produk
+                            Aktif</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%"><i class="uil uil-check"></i>
+                        Update Produk</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+        function editProduct(product) {
+            document.getElementById('editForm').action = '/admin/products/' + product.id + '/update';
+            document.getElementById('edit_category').value = product.category;
+            document.getElementById('edit_subcategory').value = product.subcategory || '';
+            document.getElementById('edit_name').value = product.name;
+            document.getElementById('edit_description').value = product.description || '';
+            document.getElementById('edit_price').value = product.price;
+            document.getElementById('edit_badge').value = product.badge || '';
+            document.getElementById('edit_existing_image').value = product.image_url || '';
+            document.getElementById('edit_is_active').checked = product.is_active == 1;
+            openModal('editModal');
+        }
+
+        // Close modal on outside click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', e => {
+                if (e.target === modal) closeModal(modal.id);
+            });
+        });
+    </script>
+</body>
+
+</html>
